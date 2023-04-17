@@ -1,0 +1,9 @@
+network:
+    ethernets:
+        ens3:
+          match:
+            macaddress: '52:54:00:12:34:56'
+            addresses:
+            dhcp4: true
+            optional: true
+    version: 2

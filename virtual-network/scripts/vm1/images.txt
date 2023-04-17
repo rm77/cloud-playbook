@@ -1,0 +1,6 @@
+image yang akan digunakan
+https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
+
+download dengan
+wget -O cloudimg.img https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
+
