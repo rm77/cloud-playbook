@@ -10,7 +10,7 @@ docker run -d --name vn1 --restart=always \
 	-v $(pwd)/inst/:/var/log/faucet/ \
 	-v /dev/kvm:/dev/kvm \
 	-p 5900:6000 \
-	-p 6653:6653 -p 9302:9302 vmdev
+	-p 6653:6653 -p 9302:9302 royyana/vmdev:1.00
 
 docker exec -ti vn1 /bin/bash
 
