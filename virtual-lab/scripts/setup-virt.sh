@@ -10,7 +10,7 @@ cat <<EOF >network-default.xml
             <port start='1024' end='65535'/> 
         </nat>
     </forward>
-    <bridge name='myvirbr0'  macTableManager='libvirt' delay='0'/> 
+    <bridge name='myvirbr0'  macTableManager='libvirt' /> 
     <ip address='192.168.122.1' netmask='255.255.255.0'> 
         <dhcp> 
             <range start='192.168.122.2' end='192.168.122.254'/> 
