@@ -5,5 +5,5 @@ MACADDRESS=00:00:00:00:00:11
 TENANT=tenant0
 
 export NAMA VNCPORT INSTANCE TENANT MACADDRESS
-sh ../provision.sh
+sh ../run-script/provision.sh
 
