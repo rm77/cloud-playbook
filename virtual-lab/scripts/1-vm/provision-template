@@ -1,8 +1,8 @@
 NAMA=cloudimg.img
 VNCPORT=5900
 MONITOR=45000
-INSTANCE=vm01
-MACADDRESS=00:00:00:00:00:11
+INSTANCE=vm0
+MACADDRESS=00:00:00:00:00:10
 
 
 #setup disk image
@@ -17,9 +17,9 @@ qemu-img info $NAMA.qcow2
 
 cat <<EOF >./user-data.cfg
 #cloud-config
-instance-id: vm01
-local-hostname: vm01
-hostname: vm01
+instance-id: $INSTANCE
+local-hostname: $INSTANCE
+hostname: $INSTANCE
 manage_etc_hosts: false
 ssh_pwauth: true
 disable_root: false
@@ -34,6 +34,9 @@ chpasswd:
     root:password
     ubuntu:myubuntu
   expire: false
+runcmd:
+- uuidgen > /etc/machine-id
+- echo "HALLOOO"
 EOF
 
 cat <<EOF >./network-config.cfg

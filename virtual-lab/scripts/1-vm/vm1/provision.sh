@@ -34,6 +34,9 @@ chpasswd:
     root:password
     ubuntu:myubuntu
   expire: false
+runcmd:
+- uuidgen > /etc/machine-id
+- echo "HALLOOO"
 EOF
 
 cat <<EOF >./network-config.cfg
