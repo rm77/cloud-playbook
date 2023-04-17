@@ -1,12 +1,11 @@
 NAMA=cloudimg.img
 VNCPORT=5900
-MONITOR=45000
 INSTANCE=vm0
 MACADDRESS=00:00:00:00:00:10
+TENANT=tenant0
 
 
 #setup disk image
-
 rm -f $NAMA.qcow2
 rm -f cloud-init.iso
 
@@ -34,9 +33,8 @@ chpasswd:
     root:password
     ubuntu:myubuntu
   expire: false
-runcmd:
-- uuidgen > /etc/machine-id
-- echo "HALLOOO"
+bootcmd:
+- uuidgen | md5sum | cut -d" " -f1 > /etc/machine-id
 EOF
 
 cat <<EOF >./network-config.cfg
@@ -54,7 +52,10 @@ EOF
 
 #setup data
 rm -f cloud-init.iso
+#jika ingin menggunakan static IP
 #cloud-localds -v -m local --network-config=network-config.cfg cloud-init.iso user-data.cfg 
+
+#menggunakan dynamic IP address via DHCP
 cloud-localds -v -m local cloud-init.iso user-data.cfg 
 
 #hapus config
@@ -73,7 +74,7 @@ virt-install \
   --import \
   --disk path=$NAMA.qcow2,bus=virtio,cache=none \
   --disk path=cloud-init.iso,device=cdrom \
-  --network network=mydefault, \
+  --network network=network-$TENANT,model=e1000,mac=$MACADDRESS \
   --console pty,target_type=virtio \
   --serial pty --noautoconsole 
 
