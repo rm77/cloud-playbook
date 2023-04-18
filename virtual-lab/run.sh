@@ -21,6 +21,6 @@ docker run -d --name vn1 \
 	-p 9302:9302 \
 	royyana/vmdev:1.00
 
-docker exec -ti vn1 /bin/bash
+#docker exec -ti vn1 /bin/bash
 
 
