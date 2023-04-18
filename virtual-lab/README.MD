@@ -47,7 +47,10 @@ masuk ke dalam environment:
         tidak perlu dicopy, gunakan perintah ln dari file cloudimg.img di direktori atasnya
            ln -s ../cloudimg.img .
       - jalankan provisioning vm dengan sh install-config.sh
-        tunggu beberapa saat
+        tunggu beberapa saat, sampai muncul "Domain creation completed."
+      - check apakah sudah jalan dengan
+        - virsh list
+        - virsh net-dhcp-leases network-tenant0  # network-tenant0 merupakan nama network id
     
     
 
