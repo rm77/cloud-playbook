@@ -51,6 +51,13 @@ masuk ke dalam environment:
       - check apakah sudah jalan dengan
         - virsh list
         - virsh net-dhcp-leases network-tenant0  # network-tenant0 merupakan nama network id
-    
+        - buka koneksi VNC ke port vnc yang sudah diatur sebelumnya melalui ip address host, gunakan
+          - login : ubuntu
+            password: myubuntu
+            setelah masuk ke console, checklah konektifitas dengan
+            - ip addr              #check ip address
+            - ping 192.168.122.1
+            - ping www.yahoo.com
+ 
     
 
