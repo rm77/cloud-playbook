@@ -1,8 +1,10 @@
 untuk menjalankan virtual-lab
 
 requirements:
+- ubuntu minimum versi 20.04
 - docker, install dengan sudo apt install -y docker.io
-- pastikan docker dapat berjalan dengan docker ps --all
+- pastikan docker dapat berjalan 
+  docker ps --all
 
 menjalankan:
 - sh run.sh, akan menjalankan container dengan nama vn1
