@@ -1,0 +1,2 @@
+jalankan source set.sh
+untuk mengeset PATH
