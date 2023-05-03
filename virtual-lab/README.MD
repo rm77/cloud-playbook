@@ -6,6 +6,10 @@ requirements:
 - pastikan docker dapat berjalan 
   docker ps --all
 
+note:
+- semua peritnah dijalankan dengan menggunakan shell script dengan /bin/sh atau /bin/bash
+
+
 menjalankan:
 - sh run.sh, akan menjalankan container dengan nama vn1
 
