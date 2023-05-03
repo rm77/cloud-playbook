@@ -15,6 +15,7 @@ docker run -d --name vn1 \
 	--mount type=tmpfs,destination=/run \
 	--mount type=tmpfs,destination=/var/run/openvswitch \
 	--mount type=tmpfs,destination=/var/run/ovn \
+	-v /var/run/docker.sock:/var/run/docker.sock:rw \
 	-v $(pwd)/scripts/:/tmp/scripts/ \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v /dev/kvm:/dev/kvm \
