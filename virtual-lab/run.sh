@@ -21,6 +21,7 @@ docker run -d --name vn1 \
 	-v /dev/kvm:/dev/kvm \
 	-v /dev/shm:/dev/shm \
 	-v /dev/pts:/dev/pts \
+	-p 20000:25000 \
 	-p 5900:6000 \
 	-p 6653:6653 \
 	-p 9302:9302 \
