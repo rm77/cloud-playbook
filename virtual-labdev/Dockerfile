@@ -12,6 +12,8 @@ RUN mkdir -p /var/log/libvirt && \
 RUN curl -sSLf https://get.k0s.sh | sh && \
     curl -Lo /usr/sbin/kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-linux-amd64 && chmod +x /usr/sbin/kind && \
     curl -Lo /usr/sbin/kubectl https://dl.k8s.io/release/v1.27.1/bin/linux/amd64/kubectl && chmod +x /usr/sbin/kubectl && \
+    curl -Lo /usr/sbin/k0sctl https://github.com/k0sproject/k0sctl/releases/download/v0.15.0/k0sctl-linux-x64 && \
+         chmod +x /usr/sbin/k0sctl && \
     wget -O /tmp/helm.tar.gz https://get.helm.sh/helm-v3.12.0-rc.1-linux-amd64.tar.gz && \
          cd /tmp/ && tar -xzvf helm.tar.gz && mv linux-amd64/helm /usr/sbin/helm && \
          chmod +x /usr/sbin/helm && \
@@ -20,4 +22,3 @@ RUN curl -sSLf https://get.k0s.sh | sh && \
          chmod +x /usr/sbin/octant
 
 CMD ["/bin/sh","-c","while true;do sleep 1000;done"]
-#CMD ["/usr/sbin/libvirtd","-v"]
