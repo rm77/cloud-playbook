@@ -62,6 +62,31 @@ set -x
 	fi
 EOF
 
+cat > create.sh <<EOF
+#!/bin/sh
+
+set -x
+        . ./.settings.json
+	. $(pwd)/../../../program/util.sh
+        chmod +x delete-*.sh
+	./delete-rule.sh
+	./delete-switch.sh
+	setup_bridge_nat $BRIDGE
+EOF
+
+cat > delete.sh <<EOF
+#!/bin/sh
+
+set -x
+        . ./.settings.json
+	. $(pwd)/../../../program/util.sh
+        chmod +x delete-*.sh
+	pid=\$(cat dnsmasq.pid)
+	kill -9 \$pid
+        ./delete-switch.sh
+        ./delete-rule.sh
+EOF
+
 . ./.settings.json
 . $(pwd)/../../../program/util.sh
 setup_bridge_nat $BRIDGE
