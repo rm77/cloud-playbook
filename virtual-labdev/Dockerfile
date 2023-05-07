@@ -20,5 +20,6 @@ RUN curl -sSLf https://get.k0s.sh | sh && \
     wget -O octant.tar.gz https://github.com/vmware-archive/octant/releases/download/v0.25.1/octant_0.25.1_Linux-64bit.tar.gz && \
          cd /tmp/ && tar -xzvf octant.tar.gz && mv octant_0.25.1_Linux-64bit/octant /usr/sbin/octant && \
          chmod +x /usr/sbin/octant
+RUN echo "deb [trusted=yes] https://apt.fury.io/netdevops/ /" | tee -a /etc/apt/sources.list.d/netdevops.list && apt -y update && apt install containerlab
 
 CMD ["/bin/sh","-c","while true;do sleep 1000;done"]
