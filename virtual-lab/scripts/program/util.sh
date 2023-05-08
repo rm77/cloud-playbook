@@ -258,6 +258,56 @@ generate_start_vm(){
 EOF
 }
 
+generate_start_vm_with_vncpassword(){
+   set -x
+
+   
+   VMNAME=$(basename $(pwd))
+   rm -f net-up.sh
+   rm -f net-down.sh
+   ln -s ../$BRIDGE/up.sh net-up.sh
+   ln -s ../$BRIDGE/down.sh net-down.sh
+   chmod +x ../$BRIDGE/up.sh
+   chmod +x ../$BRIDGE/down.sh
+
+
+   vncport=$((5900+$VNCPORT))
+   cat <<EOF >start-with-vncpassword.sh 
+        if [ -f "firsttime" ]; then echo "harap cek dulu di file .settings\nlalu jalankan sh update.sh"; exit 1; else echo "ok";fi
+	. ./.settings.json
+	. \$(pwd)/../../../program/util.sh
+	qemu-system-x86_64 \\
+        -daemonize  \\
+        -enable-kvm \\
+        -name $VMNAME \\
+        -m $VMMEMORY \\
+        -smp $VMCPU \\
+        -drive file=cloudimg.img.qcow2,if=virtio \\
+        -drive file=cloud-init.iso,media=cdrom,if=virtio \\
+        -monitor telnet:0.0.0.0:$MONITORPORT,server,nowait,nodelay \\
+        -serial telnet:0.0.0.0:$SERIALPORT,server,nowait,nodelay \\
+        -vnc :$VNCPORT,password \\
+        -netdev tap,id=interface0,ifname=$VMNAME-tap0,script=net-up.sh,downscript=net-down.sh \\
+        -device virtio-net-pci,netdev=interface0,mac=$MACADDRESS \\
+        -pidfile $VMNAME.pid 
+
+	sleep 1
+
+	echo set_password vnc $VNCPASSWORD | nc -q 1 0.0.0.0 $MONITORPORT 
+	echo expire_password vnc never | nc -q 1 0.0.0.0 $MONITORPORT 
+EOF
+
+   cat <<EOF >start-web-vnc.sh 
+        ln -s /opts/noVNC/vnc.html /opts/noVNC/index.html
+	nohup /opts/noVNC/utils/novnc_proxy --vnc 0.0.0.0:$vncport --listen $VNCWEBPORT &
+        echo \$! > WEB$VMNAME.pid
+        sleep 1
+        ppid=\$(pgrep -f websockify )
+        echo \$ppid >> WEB$VMNAME.pid
+EOF
+
+}
+
 #setup_bridge_nat "$BRIDGE"
 
 #if test "$1" ; then

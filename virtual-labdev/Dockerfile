@@ -21,5 +21,11 @@ RUN curl -sSLf https://get.k0s.sh | sh && \
          cd /tmp/ && tar -xzvf octant.tar.gz && mv octant_0.25.1_Linux-64bit/octant /usr/sbin/octant && \
          chmod +x /usr/sbin/octant
 RUN echo "deb [trusted=yes] https://apt.fury.io/netdevops/ /" | tee -a /etc/apt/sources.list.d/netdevops.list && apt -y update && apt install containerlab
+RUN git clone --depth 1 https://github.com/novnc/noVNC.git /opts/noVNC && \
+    git clone --depth 1 https://github.com/novnc/websockify /opts/noVNC/utils/websockify && \
+    rm -rf /opts/noVNC/.git && \
+    rm -rf /opts/noVNC/utils/websockify/.git && \
+    sed -i -- "s/ps -p/ps -o pid | grep/g" /opts/noVNC/utils/novnc_proxy
+
 
 CMD ["/bin/sh","-c","while true;do sleep 1000;done"]

@@ -1,7 +1,0 @@
-jalankan
-- new-switch.sh (untuk membuat virtual network)
-- new-switch-ovs.sh (untuk membuat virtual network berbasis ovs)
-- new-vm.sh untuk membuat virtual machine
-
-dalam setiap folder pastikan untuk mengecek file .settings.json
-

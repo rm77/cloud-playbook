@@ -27,6 +27,8 @@ MACADDRESS=00:00:00:12:34:56
 MONITORPORT=34001
 SERIALPORT=34000
 VNCPORT=4
+VNCWEBPORT=45904
+VNCPASSWORD=$(date | md5sum | cut -d" " -f1 | cut -b1-8)
 VMSIZE="3G"
 VMMEMORY=2048
 VMCPU=2
@@ -41,7 +43,9 @@ echo 'MACADDRESS='$MACADDRESS >> .settings.json
 echo 'MONITORPORT='$MONITORPORT >> .settings.json
 echo 'SERIALPORT='$SERIALPORT >> .settings.json
 echo 'VNCPORT='$VNCPORT >> .settings.json
-echo 'export PROJECT VMNAME BRIDGE MACADDRESS MONITORPORT SERIALPORT VNCPORT ' >> .settings.json
+echo 'VNCWEBPORT='$VNCWEBPORT >> .settings.json
+echo 'VNCPASSWORD='$VNCPASSWORD >> .settings.json
+echo 'export PROJECT VMNAME BRIDGE MACADDRESS MONITORPORT SERIALPORT VNCWEBPORT VNCPORT VNCPASSWORD' >> .settings.json
 
 
 
@@ -52,10 +56,14 @@ generate_setup_vm_image
 touch firsttime
 #update_vm_image
 generate_start_vm
+generate_start_vm_with_vncpassword
 
 cat > stop.sh <<EOF
 	. ./.settings.json
 	kill -9 \$(cat $VMNAME.pid)
+	kill -9 \$(cat WEB$VMNAME.pid)
+        kill -9 \$(pgrep -f $VNCWEBPORT)
+	rm -f WEB$VMNAME.pid $VMNAME.pid
 EOF
 
 cat > update.sh <<EOF
@@ -64,4 +72,5 @@ cat > update.sh <<EOF
 	update_vm_image
 	rm -f firsttime
 	generate_start_vm
+	generate_start_vm_with_vncpassword
 EOF
