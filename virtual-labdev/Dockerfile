@@ -26,6 +26,11 @@ RUN git clone --depth 1 https://github.com/novnc/noVNC.git /opts/noVNC && \
     rm -rf /opts/noVNC/.git && \
     rm -rf /opts/noVNC/utils/websockify/.git && \
     sed -i -- "s/ps -p/ps -o pid | grep/g" /opts/noVNC/utils/novnc_proxy
-
+RUN wget -O /opts/fc.tgz https://github.com/firecracker-microvm/firecracker/releases/download/v1.3.2/firecracker-v1.3.2-x86_64.tgz && \
+    cd /opts/ && \
+    mkdir -p fc && \
+    tar -xzvf fc.tgz -C fc && \
+    cp fc/release-v1.3.2-x86_64/* /usr/sbin/ && \
+    rm -rf fc fc.tgz
 
 CMD ["/bin/sh","-c","while true;do sleep 1000;done"]
