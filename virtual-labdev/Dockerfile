@@ -32,5 +32,6 @@ RUN wget -O /opts/fc.tgz https://github.com/firecracker-microvm/firecracker/rele
     tar -xzvf fc.tgz -C fc && \
     cp fc/release-v1.3.2-x86_64/* /usr/sbin/ && \
     rm -rf fc fc.tgz
+RUN apt install -y jq binutils
 
 CMD ["/bin/sh","-c","while true;do sleep 1000;done"]
