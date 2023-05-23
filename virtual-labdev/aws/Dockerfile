@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y terraform  docker.io
 
 RUN curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 
-RUN apt -y install docker-compose && rm -rf /var/lib/apt/lists/*
+RUN apt -y install docker-compose vim jq wget && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/root/.local/bin:${PATH}"
 
