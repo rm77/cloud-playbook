@@ -5,4 +5,4 @@ docker run -it --name aws1 \
 	-v $(pwd)/.:/data \
 	-e AWS_CONFIG_FILE=/tmp/config \
 	-e AWS_SHARED_CREDENTIALS_FILE=/tmp/credentials \
-	royyana/cltool-alpine:1.00 /bin/bash
+	royyana/cltool-alpine:1.00 /bin/sh
