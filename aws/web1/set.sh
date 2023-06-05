@@ -1,0 +1,2 @@
+USERNAME=user1
+KEYNAME=user1-key

@@ -1,1 +1,8 @@
 melihat instances --> aws ec2 describe-instances
+untuk melihat info public IP /public DNS:
+-  aws ec2 describe-instances | jq '.Reservations[].Instances[] | "\(.ImageId) \(.PublicIpAddress)" '
+
+jalankan dahulu
+source set.sh
+
+
