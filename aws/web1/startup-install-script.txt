@@ -1,3 +1,4 @@
 #!/bin/sh
-sudo apt -y update && sudo apt -y install docker.io vim htop docker-compose
+sudo apt -y update && sudo apt -y install docker.io vim htop docker-compose && sudo chmod a+rwx /var/run/docker.sock
+echo installed > /etc/installed
 
