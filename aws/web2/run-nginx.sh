@@ -4,5 +4,5 @@ docker run -d \
 	-v $(pwd)/nginx-default.conf:/etc/nginx/conf.d/default.conf \
 	-v $(pwd)/web:/usr/share/nginx/html \
 	-v $(pwd)/nginx-logs:/var/log/nginx \
-	-p 23000:80 \
+	-p 80:80 \
 	nginx 
